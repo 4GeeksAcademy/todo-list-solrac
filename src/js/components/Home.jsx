@@ -8,7 +8,7 @@ const Home = () => {
 
 
 	const [inputData, setInputData] = useState("");
-	const [task, setTask] = useState(null);
+	const [tasks, setTasks] = useState([]);
 
 
 	const onInputChange = (event) => {
@@ -17,16 +17,26 @@ const Home = () => {
 
 	const handleKeyUp = (event) => {
 		if (event.key === "Enter") {
-			setTask(inputData)
+			addTask()
 			setInputData("")
 		}
 
 	}
 
-	const addTask = (event) => {
-
+	const addTask = () => {
+		
+		setTasks([...tasks, inputData])
+		//let newTasks = [...tasks]
+		//newTasks.push(inputData)
+		//setTasks(newTasks)
 	}
 
+	const deleteTask = (index) => {
+	
+		let newTasks = [...tasks]
+		newTasks.splice(index, 1)
+		setTasks(newTasks)
+	}
 
 	return (
 
@@ -45,7 +55,10 @@ const Home = () => {
 					onKeyUp={handleKeyUp} />
 			</div>
 			<div className="row">
-				<p className="text-center">{task}</p>
+				<div className="text-center"> {tasks.map((task, index) => <p key={index}>{task}
+					<button className="btn btn-danger m-1" onClick={() => deleteTask(index)}> X </button>
+				</p>)}
+				</div>
 			</div>
 		</div>
 
