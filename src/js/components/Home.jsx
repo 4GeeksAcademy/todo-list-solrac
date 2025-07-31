@@ -24,7 +24,7 @@ const Home = () => {
 	}
 
 	const addTask = () => {
-		
+
 		setTasks([...tasks, inputData])
 		//let newTasks = [...tasks]
 		//newTasks.push(inputData)
@@ -32,7 +32,7 @@ const Home = () => {
 	}
 
 	const deleteTask = (index) => {
-	
+
 		let newTasks = [...tasks]
 		newTasks.splice(index, 1)
 		setTasks(newTasks)
@@ -53,16 +53,17 @@ const Home = () => {
 					value={inputData}
 					onChange={onInputChange}
 					onKeyUp={handleKeyUp} />
-			</div>
-			<div className="row">
-				<div className="text-center"> {tasks.map((task, index) => <p key={index}>{task}
-					<button className="btn btn-danger m-1" onClick={() => deleteTask(index)}> X </button>
-				</p>)}
-				</div>
+
+				{tasks.map((task, index) =>
+					<div className="row text-center d-flex m-2">
+						<p className="col-10" key={index}>{task}</p>
+						<div className="col-2 d-flex justify-content-end">
+							<button className="btn btn-danger" onClick={() => deleteTask(index)}> X </button>
+						</div>
+					</div>
+				)}
 			</div>
 		</div>
-
-
 	);
 };
 
